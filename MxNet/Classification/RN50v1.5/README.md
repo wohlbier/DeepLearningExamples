@@ -172,7 +172,7 @@ nvidia-docker run --rm -it --ipc=host -v <path to dataset>:/data/imagenet/train-
 **jgw
 ```
 docker build --build-arg PROXY=myproxy.com . -t nvidia_rn50_mx
-nvidia-docker run --rm -it --ipc=host -v /raid/user-scratch/jgwohlbier/mlperf/data/image_classification:/data/imagenet/train-val-recordio-passthrough nvidia_rn50_mx
+docker run --gpus all --rm -it --ipc=host -v /raid/user-scratch/jgwohlbier/mlperf/data/image_classification:/data/imagenet/train-val-recordio-passthrough nvidia_rn50_mx
 ```
 
 
