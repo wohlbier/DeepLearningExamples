@@ -166,8 +166,15 @@ docker build . -t nvidia_rn50_mx
 
 **3. Start an interactive session in the NGC container to run preprocessing/training/inference.**
 ```bash
-nvidia-docker run --rm -it --ipc=host <path to dataset>:/data/imagenet/train-val-recordio-passthrough nvidia_rn50_mx
+nvidia-docker run --rm -it --ipc=host -v <path to dataset>:/data/imagenet/train-val-recordio-passthrough nvidia_rn50_mx
 ```
+
+**jgw
+```
+docker build --build-arg PROXY=myproxy.com . -t nvidia_rn50_mx
+nvidia-docker run --rm -it --ipc=host -v /raid/user-scratch/jgwohlbier/mlperf/data/image_classification:/data/imagenet/train-val-recordio-passthrough nvidia_rn50_mx
+```
+
 
 **4. Download and preprocess the data.**
 * Download the images from http://image-net.org/download-images.
@@ -547,7 +554,7 @@ If ImageNet is mounted in the `/data/imagenet/train-val-recordio-passthrough` di
 To start validation, run:
 `./runner -n <number of gpus> -b <batch size per GPU> --data-root <path to imagenet> --dtype <float32 or float16> --mode val`
 
-By default: 
+By default:
 * the log from validation will be saved in the `log.log` file in the working directory
 * the JSON report with statistics will be saved in the `report.json` file in the working directory
 
@@ -703,7 +710,7 @@ Reported mixed precision speedups are relative to FP32 numbers for corresponding
 | 192 | 1252 | 3.20 | 153.3 | 3.20 | 153.1 | 3.20 | 154.7 | 3.19 | 155.5 | 3.21 | 156.9 | 3.20 | 182.3 | 2.81 |
 | 256 | 1251 | 3.22 | 204.6 | 3.22 | 204.3 | 3.23 | 206.4 | 3.21 | 207.1 | 3.21 | 209.3 | 3.18 | 241.9 | 2.76 |
 
-## Release notes 
+## Release notes
 
 ### Changelog
 
